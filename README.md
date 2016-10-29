@@ -1,6 +1,6 @@
 # cordova-plugin-firebase-analytics
 
-This plugin brings Google Firebase Analytics to a Cordova project with phonegap-plugin-push.
+This plugin brings Google Firebase Analytics (and Crash Reporter) to a Cordova project with phonegap-plugin-push.
 Tested only Cordova platforms iOS 3.9 and Android 5.1.
 
 ## Reason to be
