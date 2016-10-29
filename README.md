@@ -1,10 +1,17 @@
 # cordova-plugin-firebase-analytics
-This plugin brings Google Firebase Analytics to your Cordova project.
+
+This plugin brings Google Firebase Analytics to a Cordova project with phonegap-plugin-push.
+Tested only Cordova platforms iOS 3.9 and Android 5.1.
+
+## Reason to be
 
 This is a fork of https://github.com/arnesson/cordova-plugin-firebase, removing all libraries that are not required for Analytics only.
-Differently from the original, it is compatible with phonegap-plugin-push and also supports Cordova iOS platform 3.9.
 
-Android and iOS are supported.
+Differently from the original, it requires that phonegap-plugin-push is included in the same project.
+The reason for this is that both plugins include common Google libraries:
+* Conflicts on Android are resolved by Gradle, as long as the versions match (see "Android phonegap-plugin-push modifications" below).
+* Conflicts on iOS are resolved by NOT including common frameworks in this plugin.
+
 
 ## Installation
 See npm package for versions - https://www.npmjs.com/package/cordova-plugin-firebase
@@ -36,13 +43,13 @@ This plugin uses a hook (after prepare) that copies the configuration files to t
 
 **Note that the Firebase SDK requires the configuration files to be present and valid, otherwise your app will crash on boot or Firebase features won't work.**
 
-### Notes about phonegap-plugin-push
+### Android `phonegap-plugin-push` modifications
 
-If you also use phonegap-plugin-push in your app, it requires com.google.android.gms:play-services-gcm library,
+The `phonegap-plugin-push` plugin requires com.google.android.gms:play-services-gcm library,
 which is also required as a dependency by the firebase library.
 As a result, the version of both libraries must match for the project to compile.
 
-To ensure this, you can edit `platforms/android/project.properties` and replace:
+To ensure this, you should edit `platforms/android/project.properties` and replace:
 ```
 com.google.android.gms:play-services-gcm:+
 ```
@@ -50,6 +57,8 @@ by
 ```
 com.google.android.gms:play-services-gcm:9.8.0
 ```
+
+This needs to be done every time the platform is recreated.
 
 ### Notes about PhoneGap Build
 
